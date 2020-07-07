@@ -3,3 +3,5 @@ Initialized project in collaboration with re-becc-k, fellow student with Tech Ta
 Completed initial Project Structure, using example from professor. - A. Saha
 
 Completed Configurations - A. Saha
+
+Completed Model - A. Saha
