@@ -39,7 +39,7 @@ public class Product {
 
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-  private Set<Category> categories;
+  private Set<Order> categories;
 
   public Long getId() {
     return id;
@@ -77,7 +77,7 @@ public class Product {
     return imageUrl;
   }
 
-  public Set<Category> getCategories() {
+  public Set<Order> getCategories() {
     return categories;
   }
 
@@ -113,7 +113,7 @@ public class Product {
     this.imageUrl = imageUrl;
   }
 
-  public void setCategories(Set<Category> categories) {
+  public void setCategories(Set<Order> categories) {
     this.categories = categories;
   }
 
@@ -125,7 +125,7 @@ public class Product {
       @PositiveOrZero(message = "A product cannot have a negative retail price") Double retailPrice,
       @PositiveOrZero(message = "A product cannot have a negative inventory") Integer inventory,
       String description, String imageUrl,
-      Set<Category> categories) {
+      Set<Order> categories) {
     this.id = id;
     this.brand = brand;
     this.model = model;
