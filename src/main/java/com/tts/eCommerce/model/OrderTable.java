@@ -8,48 +8,58 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Category {
+public class OrderTable {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  @Column(name = "category_id")
+  @Column(name = "order_id")
   private Long id;
   
-  @NotEmpty(message = "Category must have a name")
-  private String name;
+  @NotEmpty(message = "Order must have a name")
+  private String ordername;
   private String description;
   
   public Long getId() {
     return id;
   }
   
-  public String getName() {
-    return name;
-  }
   
-  public String getDescription() {
+  public String getOrdername() {
+	return ordername;
+}
+
+
+public void setOrdername(String ordername) {
+	this.ordername = ordername;
+}
+
+
+public void setId(Long id) {
+	this.id = id;
+}
+
+
+public String getDescription() {
     return description;
   }
   
-  public void setName(String name) {
-    this.name = name;
-  }
+  
   
   public void setDescription(String description) {
     this.description = description;
   }
   
-  public Category(Long id, String name,
+  public OrderTable(Long id, String ordername,
       String description) {
     this.id = id;
-    this.name = name;
+    this.ordername = ordername;
     this.description = description;
   }
   
-  public Category() {}
+  public OrderTable() {}
   
   @Override
   public String toString() {
-    return "Category [id=" + id + ", name=" + name
+    return "Order [id=" + id + ", name=" + ordername
         + ", description=" + description + "]";
   }
   

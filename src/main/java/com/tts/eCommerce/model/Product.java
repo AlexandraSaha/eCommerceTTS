@@ -1,5 +1,6 @@
 package com.tts.eCommerce.model;
 
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,152 +15,170 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "product_id")
   private Long id;
-
-  @NotBlank(message = "A product must have a brand name")
-  private String brand;
-  @NotBlank(message = "A product must have a model")
-  private String model;
-  @NotBlank(message = "A product must have a name")
+  @Column(name = "name")
+  @NotBlank(message = "Product name cannot be blank") //what is being sold?
   private String name;
-
-  @PositiveOrZero(message = "A product cannot have a negative cost price")
-  private Double costPrice;
-  @PositiveOrZero(message = "A product cannot have a negative retail price")
-  private Double retailPrice;
-  @PositiveOrZero(message = "A product cannot have a negative inventory")
-  private Integer inventory;
-  private String description;
-  private String imageUrl;
-
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-  private Set<Order> categories;
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getBrand() {
-    return brand;
-  }
-
-  public String getModel() {
-    return model;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public Double getCostPrice() {
-    return costPrice;
-  }
-
-  public Double getRetailPrice() {
-    return retailPrice;
-  }
-
-  public Integer getInventory() {
-    return inventory;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public String getImageUrl() {
-    return imageUrl;
-  }
-
-  public Set<Order> getCategories() {
-    return categories;
-  }
-
-  public void setBrand(String brand) {
-    this.brand = brand;
-  }
-
-  public void setModel(String model) {
-    this.model = model;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setCostPrice(Double costPrice) {
-    this.costPrice = costPrice;
-  }
-
-  public void setRetailPrice(Double retailPrice) {
-    this.retailPrice = retailPrice;
-  }
-
-  public void setInventory(Integer inventory) {
-    this.inventory = inventory;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
-
-  public void setCategories(Set<Order> categories) {
-    this.categories = categories;
-  }
-
-  public Product(Long id,
-      @NotBlank(message = "A product must have a brand name") String brand,
-      @NotBlank(message = "A product must have a model") String model,
-      @NotBlank(message = "A product must have a name") String name,
-      @PositiveOrZero(message = "A product cannot have a negative cost price") Double costPrice,
-      @PositiveOrZero(message = "A product cannot have a negative retail price") Double retailPrice,
-      @PositiveOrZero(message = "A product cannot have a negative inventory") Integer inventory,
-      String description, String imageUrl,
-      Set<Order> categories) {
-    this.id = id;
-    this.brand = brand;
-    this.model = model;
-    this.name = name;
-    this.costPrice = costPrice;
-    this.retailPrice = retailPrice;
-    this.inventory = inventory;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this.categories = categories;
-  }
   
-  public Product(Long id,
-      @NotBlank(message = "A product must have a brand name") String brand,
-      @NotBlank(message = "A product must have a model") String model,
-      @NotBlank(message = "A product must have a name") String name
-      ) {
-    this.id = id;
-    this.brand = brand;
-    this.model = model;
-    this.name = name;
+  @Column(name = "retail_Price")
+  @PositiveOrZero(message = "Product retail price cannot be negative") //but is zero really ok?
+  private Double retailPrice;
+  @Column(name = "cost_Price")
+  @PositiveOrZero(message = "Product retail price cannot be negative") //but is zero really ok?
+  private Double costPrice;
+  @Column(name = "brand")
+  @NotBlank(message = "Product brand cannot be blank") //somebody made it, right?
+  private String brand;
+  @Column(name = "model")
+  @NotBlank(message = "Product model cannot be blank")
+  private String category;
+  @Column(name = "description")
+  private String description; //is it ok to create a product and add a description later? or not?
+  @Column(name = "inventory")
+  private Integer inventory; //negative inventory doesn't really make sense, can't sell it if it isn't there 
+  @Column(name = "image_url")
+  private String image; //is it ok to create a product and add an image file path later? or not?
+  
+
+  
+
+public Long getId() {
+	return id;
+}
+
+
+
+
+public void setId(Long id) {
+	this.id = id;
+}
+
+
+
+
+public String getName() {
+	return name;
+}
+
+
+
+
+public void setName(String name) {
+	this.name = name;
+}
+
+
+
+
+public Double getRetailPrice() {
+	return retailPrice;
+}
+
+
+
+
+public void setRetailPrice(Double retailPrice) {
+	this.retailPrice = retailPrice;
+}
+
+
+
+
+public Double getCostPrice() {
+	return costPrice;
+}
+
+
+
+
+public void setCostPrice(Double costPrice) {
+	this.costPrice = costPrice;
+}
+
+
+
+
+public String getBrand() {
+	return brand;
+}
+
+
+
+
+public void setBrand(String brand) {
+	this.brand = brand;
+}
+
+
+
+
+public String getCategory() {
+	return category;
+}
+
+
+
+
+public void setCategory(String category) {
+	this.category = category;
+}
+
+
+
+
+public String getDescription() {
+	return description;
+}
+
+
+
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+
+
+
+public Integer getInventory() {
+	return inventory;
+}
+
+
+
+
+public void setInventory(Integer inventory) {
+	this.inventory = inventory;
+}
+
+
+
+
+public String getImage() {
+	return image;
+}
+
+
+
+
+public void setImage(String image) {
+	this.image = image;
+}
+
+
+
+
+public Product() {
   }
 
-  public Product() {
-  }
-
-  @Override
-  public String toString() {
-    return "Product [id=" + id + ", brand=" + brand
-        + ", model=" + model + ", name=" + name
-        + ", costPrice=" + costPrice + ", retailPrice="
-        + retailPrice + ", inventory=" + inventory
-        + ", description=" + description + ", imageUrl="
-        + imageUrl + ", categories=" + categories + "]";
-  }
+  
 
 }

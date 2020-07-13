@@ -1,6 +1,6 @@
 package com.tts.eCommerce.model;
 
-import java.util.Date;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,104 +12,83 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
 public class User {
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  @Column(name="user_id")
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "USER_ID")
+  private int id;
+  @Column(name = "EMAIL")
   
+  @Email(message = "*Please provide a valid Email")
+  @NotEmpty(message = "*Please provide an email")
   private String email;
-  private String firstName;
-  private String lastName;
-  private String username;
+  @Column(name = "PASSWORD")
+  @Length(min = 5, message = "*Your password must have at least 5 characters")
+  @NotEmpty(message = "*Please provide your password")
   private String password;
-  
-  public Long getId() {
-    return id;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public Date getCreatedAt() {
-    return createdAt;
-  }
-
-  public Set<Role> getRoles() {
-    return roles;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public void setRoles(Set<Role> roles) {
-    this.roles = roles;
-  }
-
-  @CreationTimestamp
-  private Date createdAt;
-  
+  @Column(name = "USERNAME")
+  @NotEmpty(message = "*Please provide your name")
+  private String username;
+  @Column(name = "LAST_NAME")
+  @NotEmpty(message = "*Please provide your last name")
+  private String lastname;
+  @Column(name = "ACTIVE")
+  private int active;
   @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name="user_id"), 
-      inverseJoinColumns = @JoinColumn(name = "role_id)"))
+  @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
   private Set<Role> roles;
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
+public String getPassword() {
+	return password;
+}
+public void setPassword(String password) {
+	this.password = password;
+}
 
-  public User(Long id, String email, String firstName,
-      String lastName, String username, String password,
-      Date createdAt, Set<Role> roles) {
-    this.id = id;
-    this.email = email;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.username = username;
-    this.password = password;
-    this.createdAt = createdAt;
-    this.roles = roles;
-  }
+public String getUsername() {
+	return username;
+}
+public void setUsername(String username) {
+	this.username = username;
+}
+public String getLastname() {
+	return lastname;
+}
+public void setLastname(String lastname) {
+	this.lastname = lastname;
+}
+public int getActive() {
+	return active;
+}
+public void setActive(int active) {
+	this.active = active;
+}
+public Set<Role> getRoles() {
+	return roles;
+}
+public void setRoles(Set<Role> roles) {
+	this.roles = roles;
+}
+ 
 
-  public User() {}
   
   
 }

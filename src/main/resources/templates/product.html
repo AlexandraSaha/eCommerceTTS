@@ -1,10 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+   <title>ADD PRODUCT</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+   <div class="navbar-header">
+    
+    <a class="navbar-brand" href="#" th:href="@{/}">
+     Click Here to Go on Login Page</a>
+   </div>
+  </div>
+ </nav>
 
-</body>
+
+        <div>ADD PRODUCT</div>      
+    <br><br>
+ 
+    <div class="container">
+  <div class="row">
+   <div class="col-md-6 col-md-offset-3">
+    
+    
+        <h1>Product</h1>
+                <form th:action="@{/product}" th:object="${product}" method="post">
+                 <p class="error-message" style="color:red;" th:if="${#fields.hasGlobalErrors()}"
+      th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+      error</p>
+                
+        <div class="form-group" 
+      th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+                        <label for="name" class="control-label">Name</label> <input id="name" name="name" class="form-control" th:field="*{name}" />
+                                       <p style="color:red;" class="error-message"
+       th:each="error: ${#fields.errors('name')}"
+       th:text="${error}">Validation error</p>
+                                      
+                                       </div>                <div class="form-group"
+      th:classappend="${#fields.hasErrors('retailPrice')}? 'has-error':''">
+                        <label for="retailPrice" class="control-label">Retail Price</label> <input id="retailPrice" name="retailPrice" class="form-control" th:field="*{retailPrice}" />
+                                        <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('retailPrice')}"
+       th:text="${error}">Validation error</p>
+                                       </div>                    <div class="form-group"
+      th:classappend="${#fields.hasErrors('costPrice')}? 'has-error':''">
+                        <label for="costPrice" class="control-label">Cost Price</label> <input id="costPrice" name = "costPrice" class="form-control" th:field="*{costPrice}" />
+                   <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('costPrice')}" th:text="${error}">Validation
+       error</p>
+                    </div>                   <div class="form-group"
+      th:classappend="${#fields.hasErrors('brand')}? 'has-error':''">
+                        <label for="brand" class="control-label">Brand</label> <input id="brand" name="brand" class="form-control" type="brand" th:field="*{brand}" />
+                    <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('brand')}"
+       th:text="${error}">Validation error</p>
+                    </div>
+                    
+                        <div class="form-group"
+      th:classappend="${#fields.hasErrors('category')}? 'has-error':''">
+                        <label for="category" class="control-label">Category</label> <input id="category" name="category" class="form-control" th:field="*{category}" />
+                                        <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('category')}"
+       th:text="${error}">Validation error</p>
+                                       </div>
+                                       
+                                           <div class="form-group"
+      th:classappend="${#fields.hasErrors('description')}? 'has-error':''">
+                        <label for="description" class="control-label">Description</label> <input id="description" name="description" class="form-control" th:field="*{description}" />
+                                        <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('description')}"
+       th:text="${error}">Validation error</p>
+                                       </div>
+                                       
+                                           <div class="form-group"
+      th:classappend="${#fields.hasErrors('inventory')}? 'has-error':''">
+                        <label for="inventory" class="control-label">Inventory</label> <input id="inventory" name="inventory" class="form-control" th:field="*{inventory}" />
+                                        <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('inventory')}"
+       th:text="${error}">Validation error</p>
+                                       </div>
+                                       
+                                           <div class="form-group"
+      th:classappend="${#fields.hasErrors('image')}? 'has-error':''">
+                        <label for="image" class="control-label">Image</label> <input id="image" name="image" class="form-control" th:field="*{image}" />
+                                        <p style="color:red;" class="error-message"
+       th:each="error : ${#fields.errors('image')}"
+       th:text="${error}">Validation error</p>
+                                       </div>
+                    
+                    
+                    
+                    
+                    <div>                         <button type="submit" >Add Product</button>
+</div>                   
+</form>
+</div></div></div>
+               </body>
 </html>
